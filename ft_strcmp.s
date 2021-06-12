@@ -3,24 +3,51 @@ global _ft_strcmp ;так скажем , это точка входа
 section .text
 
 _ft_strcmp:
-xor rdx, rdx
 
-loop:
-    mov al, [rdi+rdx]
-    mov bl, [rsi+rdx]
-    mov rax, 0x000004
-               
-    cmp al, bl
-    jne ne_end
-    cmp al, byte 0 
-    je e_end
-    inc rdx
-    jmp loop
+xor rax, rax
+firstcheck:
+    cmp rsi, byte 0
+    je nullcheck
+    cmp rsi, byte 0
+    je nullcheck
+    jmp comparing
 
-ne_end:
-mov rax, rdi
-ret
+nullcheck:
+    cmp rsi, rdi
+    je equals
+    jmp notequals
 
-e_end:
-mov rax, 0
-ret
+comparing:
+    xor rdx, rdx
+    mov rdx, [rsi+rax]
+    cmp rdx, [rdi+rax]
+    jne notequals
+    inc rax
+    cmp rdx, byte 0
+    je checkendofline
+    cmp rdx, byte 0
+    je checkendofline
+    jmp comparing
+
+checkendofline:
+    mov rdx, [rsi+rax]
+    cmp rdx, [rdi+rax]
+    jne notequals
+    jmp equals
+
+equals:
+    mov rax, 0
+    ret
+
+notequals:
+    cmp rsi, rdi
+    jl less
+    jmp less
+
+greater:
+    mov rax, 1
+    ret
+
+less:
+    mov rax, -1
+    ret
