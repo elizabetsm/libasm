@@ -1,13 +1,26 @@
-SRC = ft_strdup.s #ft_strcmp.s #ft_read.s #ft_write.s #ft_strlen.s # #ft_strcpy.s
-OBJ = ft_strdup.o #ft_strcmp.o #ft_read.o #ft_write.o #ft_strlen.o # #ft_strcpy.o
+NAME = libasm.a
 
-all:
-	nasm -g -f macho64 $(SRC)
-	ar rcs libasm.a $(OBJ)
-	ranlib libasm.a 
+SRC = ft_strdup.s \
+ft_strcmp.s \
+ft_read.s \
+ft_write.s \
+ft_strlen.s \
+ft_strcpy.s
 
-main:
-	gcc -g -L. -lasm -o main main.c && ./main
+OBJ = $(SRC:.s=.o)
 
-clean:
-	rm -f $(OBJ)
+FLAGS = -g -f macho64
+
+%.o: %.s
+	nasm $(FLAGS) $<
+
+
+all: $(NAME)
+	
+$(NAME): $(OBJ)
+	ar rcs $(NAME) $(OBJ)
+
+test:
+	gcc -g -L. -lasm main.c
+	./a.out
+	

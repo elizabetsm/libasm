@@ -6,32 +6,31 @@ _ft_strcmp:
 
 xor rax, rax
 firstcheck:
-    cmp rsi, byte 0
-    je nullcheck
-    cmp rsi, byte 0
+    cmp rdi, byte 0
     je nullcheck
     jmp comparing
 
 nullcheck:
-    cmp rsi, rdi
+    cmp rdi, rsi
     je equals
     jmp notequals
 
 comparing:
-    xor rdx, rdx
-    mov rdx, [rsi+rax]
-    cmp rdx, [rdi+rax]
+    xor rcx, rcx
+    mov rcx, [rdi+rax]
+    cmp rcx, [rsi+rax]
     jne notequals
     inc rax
-    cmp rdx, byte 0
+    cmp rcx, byte 0
     je checkendofline
-    cmp rdx, byte 0
+    cmp rcx, byte 0
     je checkendofline
     jmp comparing
 
 checkendofline:
-    mov rdx, [rsi+rax]
-    cmp rdx, [rdi+rax]
+    xor rcx, rdx
+    mov rcx, [rdi+rax]
+    cmp rcx, [rsi+rax]
     jne notequals
     jmp equals
 
@@ -40,9 +39,13 @@ equals:
     ret
 
 notequals:
-    cmp rsi, rdi
+    xor rcx, rdx
+    mov rcx, [rdi+rax]
+    sub rcx, [rsi + rax]
+    cmp rcx, 0
     jl less
-    jmp less
+    jmp greater
+    
 
 greater:
     mov rax, 1

@@ -1,16 +1,21 @@
 global _ft_write
 
+section .text
+
+extern ___error
 
 _ft_write:
-segment .text
-mov rax, 0x2000004 ;write
-mov rdi, rdi ;write to sdtout
-mov rsi, rsi
-mov rdx, rdx
-syscall
+    mov rax, 0x2000004 ;write
+    syscall
+    jc error
+    ret
 
-ret
-; mov rax, 0x2000001 ;exit
-; mov rdi, 0
-; syscall
+    error:
+        push rcx
+        mov rcx, rax
+        call ___error
+        mov [rax], rbx
+        mov rax, -1
+        pop rcx
+        ret
         

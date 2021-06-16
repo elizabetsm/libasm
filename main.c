@@ -24,7 +24,7 @@
 // }
 
 int main(){
-    ft_strdup("a");
+   ft_strdup("a");
     // int i = strlen("hello");
     // int j = ft_strlen("hello");
 
@@ -33,13 +33,14 @@ int main(){
     // else 
     //     printf("KO, i = %d, j = %d", i, j);
 
-    int i = ft_strcmp("\x02", "\x01");
-    int j = strcmp("\x02", "\x01");
-    // printf("%d", ft_strcmp("df", "af"));
-     if (i == j)
-        printf("ok i = %d, j = %d", i, j);
-    else 
-        printf("KO, i = %d, j = %d", i, j);
+    // int i = ft_strcmp("z", "a");
+    // int j = strcmp("z", "a");
+    // // printf("%d", ft_strcmp("df", "af"));
+    //  if (i == j)
+    //     printf("ok i = %d, j = %d", i, j);
+    // else 
+    //     printf("KO, i = %d, j = %d", i, j);
+
 // printf("%d", strcmp("", "af"));
     // char *dst = (char *)malloc(sizeof(char *) * 500);
     // printf("\n%s\n",ft_strcpy(dst, "ld: warning: PIE disabled. Absolute addressing (perhaps -mdynamic-no-pic) not allowed in code signed PIE, but used in _ft_strcpy from ./libasm.a(ft_strcpy.o). To fix this warning, don't compile with -mdynamic-no-pic or link with -Wl,-no_pie"));
@@ -47,10 +48,15 @@ int main(){
     // free(dst);
     // signal(SIGSEGV, baktrace);
 
-    // printf("%d", ft_write(1, "hello world\n", 11));
+// int fd = open("file", O_RDWR);
+//     printf("\n%d\n", ft_write(fd, "NULL", 2));
+//     printf("\n%zd\n", write(-1, "NULL", 2));
     // int fd = open("ft_write.s", O_RDONLY);
     // char buf[12];
-    // printf("%lu", ft_read(fd, &buf, 10));
-    // printf("%s", buf);
+    // printf("%lu\n", ft_read(fd, &buf, 10));
+    // printf("\nmy buf = %s", buf);
+
+    // printf("%lu", read(fd, &buf, 10));
+    // printf("\nbuf = %s", buf);
     return 0;    
 }

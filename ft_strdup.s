@@ -3,21 +3,28 @@ extern _malloc
 global _ft_strdup
 
 section .text
+extern _ft_strlen
+extern _ft_strcpy
+extern _malloc 
 
 _ft_strdup:
- push rbp
-        push r12
-        push rbx
-     mov  rdi, 16
-        call _malloc
+   xor rax, rax
+   cmp rdi, 0
+   je end
+   jmp duplicate
 
-        ; check if the malloc failed
-        test rax, rax
-        jz   fail_exit
-        mov  rbx, rax
-        ret
+   duplicate:
+   sub rsp, 16 
+      push rdi
+      call _ft_strlen
+      inc rax
+      mov rdi, rax
+      push rdi
+      call _malloc
+      call _ft_strcpy
+      pop rdi
+      mov rax, rdi
 
-    fail_exit:
-    mov rax, 0x2000001 ;exit
-    mov rdi, -1
-    syscall
+
+end:
+   ret
